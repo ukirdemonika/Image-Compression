@@ -1,0 +1,6 @@
+Bootstrap & jquery
+-->npm i bootstrap jquery
+
+proxy-conf.json
+package.json(change start)
+angular.json(style, scripts)

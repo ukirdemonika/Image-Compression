@@ -1,0 +1,102 @@
+<style>
+  a{
+    color:#ffff;
+  }
+  img{
+    border:2px solid black;
+
+  }
+
+
+</style>
+<div class="container" style="max-width:900px;">
+  <div class="jumbotron mt-5" >
+
+    <div class="col-sm-8 mx-auto" >
+      <h1 class="text-center">Image Compressor</h1>
+    </div>
+
+
+    <br>
+    <div class="text-center">
+
+
+    <table class="table col-md-6 mx-auto" >
+      <tr>
+          <td colspan="2">
+          <span style="color:red;" *ngIf="message">{{message}}</span>
+          <div class="text-center">
+          <input  #file type="file" accept='image/*' (change)="preview(file.files)" />
+          </div>
+
+          <br><br>
+            <p><b>Original Image</b></p>
+
+          <div class="outset" *ngIf="imgURL; else default">
+             <img  [src]="imgURL" >
+          </div>
+
+          <ng-template #default>
+             <img  src="../assets/original.png">
+          </ng-template>
+
+
+          </td>
+
+
+
+
+
+         <!-- <input type="file" (change)="onFileSelected($event)">-->
+
+      </tr>
+
+       <tr>
+        <td class="text-left"><b>Percentage</b></td>
+        <td class="text-right"><b>Thumbnails</b></td>
+      </tr>
+
+      <tr>
+        <td class="text-left"><select (change)="onChangePer($event)">
+        <option *ngFor="let v of percentages" [value]="v.id">{{v.name}}</option>
+        </select></td>
+
+        <td class="text-right"><select (change)="onChangeThumb($event)">
+         <option *ngFor="let v of thumbnails" [value]="v.id">{{v.name}}</option>
+          </select></td>
+      </tr>
+
+      <tr>
+           <td colspan="2">
+          <button  class="text-center" class="btn btn-primary" (click)="onImageChange(selected_file)" >Compress</button>
+           </td>
+      </tr>
+
+
+      <tr>
+         <td colspan="2">
+           <p><b>Compressed Image</b></p>
+
+
+           <div class="outset" *ngIf="imagePreview; else defaultImage">
+             <img  [src]="sanitizer.bypassSecurityTrustUrl(imagePreview)" >
+          </div>
+
+          <ng-template #defaultImage>
+             <img  src="../assets/compress1.png">
+          </ng-template>
+         </td>
+
+
+      </tr>
+      <br>
+
+      <tr >
+        <td colspan="2">
+        <button (click)="download()" class="btn btn-success"><a [href]="fileUrl" download=compressed_{{selected_file_name}}>Download</a></button>
+        </td>
+      </tr>
+    </table>
+    </div>
+  </div>
+</div>
